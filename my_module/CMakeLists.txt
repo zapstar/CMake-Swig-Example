@@ -3,6 +3,8 @@ project(MyModule)
 
 set(CMAKE_C_STANDARD 90)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 add_library(my_module hash_table.c add.c sub.c)
 target_include_directories(my_module
   # Within our library, if a header file `xyz.h` is present
