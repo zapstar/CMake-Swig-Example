@@ -5,8 +5,6 @@ compiler:
   - gcc
 os:
   - linux
-before_install:
-  - eval "CC=gcc-7 && CXX=g++-7"
 install:
   - wget --quiet --no-check-certificate "https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh" -O ./cmake.sh &&
     chmod +x ./cmake.sh &&
@@ -20,10 +18,5 @@ script:
     make test
 addons:
   apt:
-    sources:
-      - sourceline: 'ppa:ubuntu-toolchain-r/test'
     packages:
-      - gcc-7
-      - python3
-      - libpython3-dev
       - swig
