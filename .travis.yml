@@ -3,20 +3,24 @@ sudo: false
 dist: xenial
 compiler:
   - gcc
+  - clang
 os:
   - linux
+  - osx
 install:
-  - wget --quiet --no-check-certificate "https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh" -O ./cmake.sh &&
-    chmod +x ./cmake.sh &&
-    mkdir -p "$HOME/cmake-install" &&
-    ./cmake.sh --skip-license --exclude-subdir --prefix="$HOME/cmake-install/"
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then ./install-cmake-linux.sh; fi
 script:
   - mkdir _build &&
     cd _build &&
-    "$HOME/cmake-install/bin/cmake" .. &&
+    cmake .. &&
     make &&
     make test
 addons:
   apt:
     packages:
       - swig
+  homebrew:
+    packages:
+      - swig
+      - cmake
+    update: true
